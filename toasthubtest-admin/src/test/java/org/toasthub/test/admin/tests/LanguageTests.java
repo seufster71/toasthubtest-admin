@@ -1,46 +1,46 @@
-package org.toasthub.test.admin.language;
+package org.toasthub.test.admin.tests;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.junit.Test;
+import org.toasthub.test.admin.pages.LanguageAdminPage;
 import org.toasthub.test.core.general.BaseTests;
-import org.toasthub.test.core.login.LoginPage;
-import org.toasthub.test.core.member.MemberArea;
+import org.toasthub.test.core.pages.login.LoginPage;
 import org.toasthub.test.core.selenium.Driver;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LanguageTests extends BaseTests {
 
 	@Test
-	public void t1loginTest(){
+	public void t1initTest(){
 		LoginPage.login();
-		
-		Assert.assertEquals(true,MemberArea.IsAt());
+		Driver.waitSeconds(1);
+		LanguageAdminPage.gotoPage();
 	}
 
 	// create language
 	@Test
 	public void t2createLanguageTest(){
-		LanguageAdminPage.createLanguage();
+		LanguageAdminPage.create("German", "German", "Deutsche", "gr", "ltr");
 		Driver.waitSeconds(2);
-		Assert.assertEquals(true,LanguageAdminPage.languageExists("German"));
+		Assert.assertEquals(true,LanguageAdminPage.exists("German"));
 	}
 	
 	// modify language
 	@Test
 	public void t3modifyLanguageTest(){
-		LanguageAdminPage.modifyLanguage();
+		LanguageAdminPage.modify("German", "GermanModify");
 		Driver.waitSeconds(1);
-		Assert.assertEquals(true,LanguageAdminPage.languageExists("Something xx"));
+		Assert.assertEquals(true,LanguageAdminPage.exists("GermanModify"));
 	}
 	
 	// search for the new language
 	@Test
 	public void t4searchLanguageTest(){
-		LanguageAdminPage.searchLanguage("German");
+		LanguageAdminPage.search("GermanModify");
 		Driver.waitSeconds(1);
-		Assert.assertEquals(true,LanguageAdminPage.languageExists("German"));
+		Assert.assertEquals(true,LanguageAdminPage.exists("GermanModify"));
 	}
 	/*
 	// create a duplicate language -- negative test
@@ -53,14 +53,12 @@ public class LanguageTests extends BaseTests {
 	
 	// delete default language -- negative test
 	
-	
+	*/
 	// delete the language
 	@Test
-	public void deleteLanguageTest(){
-		LanguageAdminPage.deleteLanguage();
-		
-		Assert.assertEquals(false,LanguageAdminPage.languageExists());
+	public void t5deleteLanguageTest(){
+		LanguageAdminPage.delete("GermanModify");
+		Driver.waitSeconds(1);
+		Assert.assertEquals(false,LanguageAdminPage.exists("GermanModify"));
 	}
-	
-	*/
 }

@@ -1,4 +1,4 @@
-package org.toasthub.test.admin.language;
+package org.toasthub.test.admin.pages;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.toasthub.test.core.general.GeneralSettings;
 import org.toasthub.test.core.selenium.Driver;
 
-public class LanguageAdminPage {
+public class MenuAdminPage {
 	
-	public static void createLanguage() {
+	public static void create() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=menuPublic");
 		
 		// open create modal
 		Driver.getInstance().findElement(By.id("language-menu")).click();
@@ -36,7 +36,7 @@ public class LanguageAdminPage {
 		
 	}
 
-	public static void modifyLanguage() {
+	public static void modify() {
 		// got to page
 		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
 		
@@ -51,22 +51,26 @@ public class LanguageAdminPage {
 		
 	}
 	
-	public static void deleteLanguage() {
+	public static void delete(String text) {
 		// got to page
 		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
 		
 		// find test row ?
+		List<WebElement> rows = Driver.getInstance().findElements(By.xpath("//tr/td[contains(text(),'"+text+"')]"));
+		if (rows.size() == 1) {
+			for (WebElement webElement : rows) {
+				System.out.println(webElement.getText());
+			}
+			// delete
+			//Driver.getInstance().findElement(By.id("db-3")).click();
+			//Driver.waitSeconds(1);
 		
-		// open modify modal
-		Driver.getInstance().findElement(By.id("db-3")).click();
-		Driver.waitSeconds(1);
-		
-		// acknowledge
-		Driver.getInstance().findElement(By.id("modalButtonAccept-acknowledgeModal")).click();
-		
+			// acknowledge
+			//Driver.getInstance().findElement(By.id("modalButtonAccept-acknowledgeModal")).click();
+		}
 	}
 	
-	public static void searchLanguage(String text) {
+	public static void search(String text) {
 		// got to page
 		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
 		
@@ -75,7 +79,7 @@ public class LanguageAdminPage {
 		Driver.getInstance().findElement(By.id("languageSearchField-button")).click();
 	}
 	
-	public static Boolean languageExists(String text) {
+	public static Boolean exists(String text) {
 		
 		List<WebElement> list = Driver.getInstance().findElements(By.xpath("//td[contains(text(),'"+text+"')]"));
 		if (list.size() > 0) {
