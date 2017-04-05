@@ -5,83 +5,83 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.toasthub.test.core.general.GeneralSettings;
 import org.toasthub.test.core.selenium.Driver;
 
 public class PreferenceAdminPage {
 	
-	public static void create() {
+	public static void gotoPage(){
 		// got to page
 		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=prefPublic");
+	}
+	
+	public static void create(String name, String defaultTitle, String titleEN, String titleES) {
 		
 		// open create modal
-		Driver.getInstance().findElement(By.id("language-menu")).click();
+		Driver.getInstance().findElement(By.id("pref-menu")).click();
 		Driver.waitSeconds(1);
-		Driver.getInstance().findElement(By.id("language-add")).click();
+		Driver.getInstance().findElement(By.id("pref-add")).click();
 		Driver.waitSeconds(1);
 		
 		// fill form
-		Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_TITLE_DEFAULT")).sendKeys("German");
-		Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_TITLE_TEXT-en")).sendKeys("German");
-		Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_TITLE_TEXT-es")).sendKeys("Deutsche");
-		Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_CODE")).sendKeys("gr");
-		Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_ACTIVE-0")).findElement(By.xpath("..")).click();
+		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_NAME")).sendKeys(name);
+		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_TITLE_DEFAULT")).sendKeys(defaultTitle);
+		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_TITLE_TEXT-en")).sendKeys(titleEN);
+		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_TITLE_TEXT-es")).sendKeys(titleES);
+		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_ACTIVE-0")).findElement(By.xpath("..")).click();
 		// not testing this yet
-		//Driver.getInstance().findElement(By.id("radio-ADMIN_LANGUAGE_FORM_DEFAULT"));
-		Select dir = new Select(Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_DIRECTION")));
-		dir.selectByValue("ltr");
+		//Select dir = new Select(Driver.getInstance().findElement(By.id("APP_PAGE_FORM_CATEGORY")));
+		//dir.selectByValue("PUBLIC");
 		// save
-		Driver.getInstance().findElement(By.id("modalButtonAccept-languageModal")).click();
+		Driver.getInstance().findElement(By.id("modalButtonAccept-prefsModal")).click();
 		
 	}
 
-	public static void modify() {
-		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
+	public static void modify(String name, String titleEN) {
 		
 		// find test row ?
+		WebElement m = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/a[contains(@id,'settings-menu')]"));
+		// open menu
+		m.click();
+		WebElement o = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/ul/li/a[contains(@id,'Modify')]"));
+		// open menu
+		o.click();
 		
 		// open modify modal
-		Driver.getInstance().findElement(By.id("sb-3")).click();
 		Driver.waitSeconds(1);
-		Driver.getInstance().findElement(By.id("ADMIN_LANGUAGE_FORM_TITLE_TEXT-en")).sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), "Something xx");
+		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_TITLE_TEXT-en")).sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), titleEN);
 		// save
-		Driver.getInstance().findElement(By.id("modalButtonAccept-languageModal")).click();
+		Driver.getInstance().findElement(By.id("modalButtonAccept-prefsModal")).click();
 		
 	}
 	
-	public static void delete(String text) {
-		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
-		
+	public static void delete(String name) {
+	
 		// find test row ?
-		List<WebElement> rows = Driver.getInstance().findElements(By.xpath("//tr/td[contains(text(),'"+text+"')]"));
-		if (rows.size() == 1) {
-			for (WebElement webElement : rows) {
-				System.out.println(webElement.getText());
-			}
-			// delete
-			//Driver.getInstance().findElement(By.id("db-3")).click();
-			//Driver.waitSeconds(1);
+		WebElement m = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/a[contains(@id,'settings-menu')]"));
+		// open menu
+		m.click();
+		WebElement o = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/ul/li/a[contains(@id,'Delete')]"));
+		// open menu
+		o.click();
+			
+		Driver.waitSeconds(1);
 		
-			// acknowledge
-			//Driver.getInstance().findElement(By.id("modalButtonAccept-acknowledgeModal")).click();
-		}
+		// acknowledge
+		Driver.getInstance().findElement(By.id("modalButtonAccept-acknowledgeModal")).click();
+		
 	}
 	
 	public static void search(String text) {
-		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
-		
+	
 		// search
-		Driver.getInstance().findElement(By.id("languageSearchField")).sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), text);
-		Driver.getInstance().findElement(By.id("languageSearchField-button")).click();
+		Driver.getInstance().findElement(By.id("preferenceSearchField")).sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), text);
+		Driver.getInstance().findElement(By.id("preferenceSearchField-button")).click();
 	}
 	
-	public static Boolean exists(String text) {
+	public static Boolean exists(String name) {
 		
-		List<WebElement> list = Driver.getInstance().findElements(By.xpath("//td[contains(text(),'"+text+"')]"));
+		List<WebElement> list = Driver.getInstance().findElements(By.xpath("//h2/a[contains(text(),'"+name+"')]"));
 		if (list.size() > 0) {
 			return true;
 		} else {
