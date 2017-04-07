@@ -40,10 +40,10 @@ public class PreferenceAdminPage {
 	public static void modify(String name, String titleEN) {
 		
 		// find test row ?
-		WebElement m = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/a[contains(@id,'settings-menu')]"));
-		// open menu
+		WebElement m = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/../following-sibling::ul/li/a[contains(@id,'settings-menu')]"));
+		// open menu  
 		m.click();
-		WebElement o = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/ul/li/a[contains(@id,'Modify')]"));
+		WebElement o = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/../following-sibling::ul/li/ul/li/a[contains(text(),'Modify')]"));
 		// open menu
 		o.click();
 		
@@ -58,10 +58,10 @@ public class PreferenceAdminPage {
 	public static void delete(String name) {
 	
 		// find test row ?
-		WebElement m = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/a[contains(@id,'settings-menu')]"));
+		WebElement m = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/../following-sibling::ul/li/a[contains(@id,'settings-menu')]"));
 		// open menu
 		m.click();
-		WebElement o = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/following-sibling::ul/li/ul/li/a[contains(@id,'Delete')]"));
+		WebElement o = Driver.getInstance().findElement(By.xpath("//h2/a[contains(text(),'"+name+"')]/../following-sibling::ul/li/ul/li/a[contains(text(),'Delete')]"));
 		// open menu
 		o.click();
 			
