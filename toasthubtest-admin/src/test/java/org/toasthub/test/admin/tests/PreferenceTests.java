@@ -13,7 +13,7 @@ import org.toasthub.test.core.selenium.Driver;
 public class PreferenceTests extends BaseTests {
 
 	@Test
-	public void t1loginTest(){
+	public void tAAloginTest(){
 		LoginPage.login();
 		Driver.waitMilli(500);
 		PreferenceAdminPage.gotoPage();
@@ -21,27 +21,128 @@ public class PreferenceTests extends BaseTests {
 
 	// create preference
 	@Test
-	public void t2createPreferenceTest(){
+	public void tABcreatePreferenceTest(){
 		PreferenceAdminPage.create("TEST_PAGE_NAME_TEST","PrefTest","PrefTest","Pref test spanish");
-		Driver.waitSeconds(2);
+		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefTest"));
 	}
 	
 	// modify preference
 	@Test
-	public void t3modifyPreferenceTest(){
+	public void tACmodifyPreferenceTest(){
 		PreferenceAdminPage.modify("PrefTest","PrefModify");
-		Driver.waitSeconds(1);
+		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefModify"));
 	}
 	
 	// search for the new preference
 	@Test
-	public void t4searchPreferenceTest(){
+	public void tADsearchPreferenceTest(){
 		PreferenceAdminPage.search("PrefModify");
 		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefModify"));
 	}
+	
+	// open collapse
+	@Test
+	public void tAEopenSubTest() {
+		PreferenceAdminPage.openSub("PrefModify");
+		Driver.waitMilli(500);
+	}
+	
+	// create formfield
+	@Test
+	public void tBAcreateFormField(){
+		PreferenceAdminPage.createFormfield("TEST_FORMFIELD_NAME_TEST","PrefForm","PrefForm","Pref form spanish","String","MAIN","labelen","labeles");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefForm"));
+	}
+	
+	// modify formfield
+	@Test
+	public void tBBmodifyFormField(){
+		PreferenceAdminPage.modifyFormfield("PrefForm","PrefFormModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefFormModify"));
+	}
+	
+	// delete formfield
+	@Test
+	public void tBCdeleteFormField(){
+		PreferenceAdminPage.deleteFormfield("PrefFormModify");
+	}
+		
+	// create label
+	@Test
+	public void tCAcreateLabel(){
+		Driver.waitMilli(500);
+		PreferenceAdminPage.createLabel("TEST_LABEL_NAME_TEST","PrefLabel","PrefLabel","Pref label spanish","","labelen","labeles");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefLabel"));
+	}
+	
+	// modify label
+	@Test
+	public void tCBmodifyLabel(){
+		PreferenceAdminPage.modifyLabel("PrefLabel","PrefLabelModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefLabelModify"));
+	}
+	
+	// delete label
+	@Test
+	public void tCCdeleteLabel(){
+		PreferenceAdminPage.deleteLabel("PrefLabelModify");
+	}
+		
+	// create text
+	@Test
+	public void tDAcreateText(){
+		Driver.waitMilli(500);
+		PreferenceAdminPage.createText("TEST_TEXT_NAME_TEST","PrefText","PrefText","Pref text spanish","","valueen","valuees");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefText"));
+	}
+	
+	// modify text
+	@Test
+	public void tDBmodifyText(){
+		PreferenceAdminPage.modifyText("PrefText","PrefTextModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefTextModify"));
+	}
+	
+	// delete text
+	@Test
+	public void tDCdeleteText(){
+		PreferenceAdminPage.deleteText("PrefTextModify");
+	}
+		
+	// create option
+	@Test
+	public void tEAcreateOption(){
+		Driver.waitMilli(500);
+		PreferenceAdminPage.createOption("TEST_OPTION_NAME_TEST","PrefOption","PrefOption","Pref option spanish",
+				"Boolean","true","","valueen","","valuees","");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefOption"));
+	}
+	
+	// modify text
+	@Test
+	public void tEBmodifyOption(){
+		PreferenceAdminPage.modifyOption("PrefOption","PrefOptionModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefOptionModify"));
+	}
+	
+	// delete text
+	@Test
+	public void tECdeleteOption(){
+		PreferenceAdminPage.deleteOption("PrefOptionModify");
+	}
+	
+	
 	/*
 	// create a duplicate preference -- negative test
 	@Test
@@ -55,7 +156,8 @@ public class PreferenceTests extends BaseTests {
 	*/
 	// delete the preference
 	@Test
-	public void t5deletePreferenceTest(){
+	public void tZAdeletePreferenceTest(){
+		Driver.waitMilli(500);
 		PreferenceAdminPage.delete("PrefModify");
 		Driver.waitMilli(500);
 		Assert.assertEquals(false,PreferenceAdminPage.exists("PrefModify"));
