@@ -21,11 +21,8 @@ public class PreferenceAdminPage {
 		
 		// open create modal
 		Driver.getAndWait("pref-menu").click();
-		//Driver.getInstance().findElement(By.id("pref-menu")).click();
-		//Driver.waitSeconds(1);
+
 		Driver.getAndWait("pref-add").click();
-		//Driver.getInstance().findElement(By.id("pref-add")).click();
-		//Driver.waitSeconds(1);
 		
 		// fill form
 		Driver.getInstance().findElement(By.id("APP_PAGE_FORM_NAME")).sendKeys(name);

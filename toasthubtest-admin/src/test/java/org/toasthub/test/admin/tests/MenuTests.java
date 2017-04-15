@@ -7,42 +7,76 @@ import org.junit.Test;
 import org.toasthub.test.admin.pages.MenuAdminPage;
 import org.toasthub.test.core.general.BaseTests;
 import org.toasthub.test.core.pages.login.LoginPage;
-import org.toasthub.test.core.pages.member.MemberArea;
 import org.toasthub.test.core.selenium.Driver;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MenuTests extends BaseTests {
 
 	@Test
-	public void t1loginTest(){
+	public void tAAloginTest(){
 		LoginPage.login();
-		
-		Assert.assertEquals(true,MemberArea.IsAt());
+		Driver.waitMilli(500);
+		MenuAdminPage.gotoPage();
 	}
 
 	// create menu
 	@Test
-	public void t2createMenuTest(){
-		MenuAdminPage.create();
-		Driver.waitSeconds(2);
-		Assert.assertEquals(true,MenuAdminPage.exists("German"));
+	public void tABcreateMenuTest(){
+		MenuAdminPage.create("TEST_MENU_TEST","MenuTest","MenuTest","Menu test spanish","1.0","1.0");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,MenuAdminPage.exists("MenuTest"));
 	}
 	
 	// modify menu
 	@Test
-	public void t3modifyMenuTest(){
-		MenuAdminPage.modify();
-		Driver.waitSeconds(1);
-		Assert.assertEquals(true,MenuAdminPage.exists("Something xx"));
+	public void tACmodifyMenuTest(){
+		MenuAdminPage.modify("MenuTest","MenuModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,MenuAdminPage.exists("MenuModify"));
 	}
 	
 	// search for the menu
 	@Test
-	public void t4searchMenuTest(){
-		MenuAdminPage.search("German");
-		Driver.waitSeconds(1);
-		Assert.assertEquals(true,MenuAdminPage.exists("German"));
+	public void tADsearchMenuTest(){
+		MenuAdminPage.search("MenuModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,MenuAdminPage.exists("MenuModify"));
 	}
+	
+	// open collapse
+	@Test
+	public void tAEopenSubTest() {
+		MenuAdminPage.openSub("MenuModify");
+		Driver.waitMilli(500);
+	}
+	
+	// create submenu
+	@Test
+	public void tBAcreateSubMenu(){
+		MenuAdminPage.createSubMenu("TEST_SUB_MENU_TEST","SubMenuEN","SubMenuHrefEN","SubMenuImageEN","SubMenuES","SubMenuHrefES","SubMenuImageES");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,MenuAdminPage.exists("SubMenuEN"));
+	}
+	
+	// modify submenu
+	@Test
+	public void tBBmodifySubMenu(){
+		MenuAdminPage.modifySubMenu("SubMenuEN","SubMenuENModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(true,MenuAdminPage.exists("SubMenuENModify"));
+	}
+	
+	// delete submenu
+	@Test
+	public void tBCdeleteSubMenu(){
+		MenuAdminPage.deleteSubMenu("SubMenuENModify");
+	}
+	
+	
+	// create menuItem
+	
+	
+	
 	/*
 	// create a duplicate menu -- negative test
 	@Test
@@ -56,9 +90,11 @@ public class MenuTests extends BaseTests {
 	*/
 	// delete the menu
 	@Test
-	public void t5deleteMenuTest(){
-		MenuAdminPage.delete("German");
-		
-		//Assert.assertEquals(false,LanguageAdminPage.languageExists());
+	public void tZAdeleteMenuTest(){
+		Driver.waitMilli(500);
+		MenuAdminPage.delete("MenuModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(false,MenuAdminPage.exists("MenuModify"));
+		Driver.waitMilli(500);
 	}
 }
