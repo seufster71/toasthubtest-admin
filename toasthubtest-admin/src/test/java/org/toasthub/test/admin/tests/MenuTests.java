@@ -15,7 +15,6 @@ public class MenuTests extends BaseTests {
 	@Test
 	public void tAAloginTest(){
 		LoginPage.login();
-		Driver.waitMilli(500);
 		MenuAdminPage.gotoPage();
 	}
 
@@ -23,7 +22,6 @@ public class MenuTests extends BaseTests {
 	@Test
 	public void tABcreateMenuTest(){
 		MenuAdminPage.create("TEST_MENU_TEST","MenuTest","MenuTest","Menu test spanish","1.0","1.0");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,MenuAdminPage.exists("MenuTest"));
 	}
 	
@@ -31,7 +29,6 @@ public class MenuTests extends BaseTests {
 	@Test
 	public void tACmodifyMenuTest(){
 		MenuAdminPage.modify("MenuTest","MenuModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,MenuAdminPage.exists("MenuModify"));
 	}
 	
@@ -39,7 +36,6 @@ public class MenuTests extends BaseTests {
 	@Test
 	public void tADsearchMenuTest(){
 		MenuAdminPage.search("MenuModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,MenuAdminPage.exists("MenuModify"));
 	}
 	
@@ -47,14 +43,12 @@ public class MenuTests extends BaseTests {
 	@Test
 	public void tAEopenSubTest() {
 		MenuAdminPage.openSub("MenuModify");
-		Driver.waitMilli(500);
 	}
 	
 	// create submenu
 	@Test
 	public void tBAcreateSubMenu(){
 		MenuAdminPage.createSubMenu("TEST_SUB_MENU_TEST","SubMenuEN","SubMenuHrefEN","SubMenuImageEN","SubMenuES","SubMenuHrefES","SubMenuImageES");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,MenuAdminPage.exists("SubMenuEN"));
 	}
 	
@@ -62,7 +56,6 @@ public class MenuTests extends BaseTests {
 	@Test
 	public void tBBmodifySubMenu(){
 		MenuAdminPage.modifySubMenu("SubMenuEN","SubMenuENModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,MenuAdminPage.exists("SubMenuENModify"));
 	}
 	
@@ -91,10 +84,8 @@ public class MenuTests extends BaseTests {
 	// delete the menu
 	@Test
 	public void tZAdeleteMenuTest(){
-		Driver.waitMilli(500);
 		MenuAdminPage.delete("MenuModify");
 		Driver.waitMilli(500);
 		Assert.assertEquals(false,MenuAdminPage.exists("MenuModify"));
-		Driver.waitMilli(500);
 	}
 }

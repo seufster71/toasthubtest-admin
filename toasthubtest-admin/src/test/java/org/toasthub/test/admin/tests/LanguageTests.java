@@ -15,7 +15,6 @@ public class LanguageTests extends BaseTests {
 	@Test
 	public void t1initTest(){
 		LoginPage.login();
-		Driver.waitSeconds(1);
 		LanguageAdminPage.gotoPage();
 	}
 
@@ -23,7 +22,6 @@ public class LanguageTests extends BaseTests {
 	@Test
 	public void t2createLanguageTest(){
 		LanguageAdminPage.create("German", "German", "Deutsche", "gr", "ltr");
-		Driver.waitSeconds(2);
 		Assert.assertEquals(true,LanguageAdminPage.exists("German"));
 	}
 	
@@ -31,7 +29,6 @@ public class LanguageTests extends BaseTests {
 	@Test
 	public void t3modifyLanguageTest(){
 		LanguageAdminPage.modify("German", "GermanModify");
-		Driver.waitSeconds(1);
 		Assert.assertEquals(true,LanguageAdminPage.exists("GermanModify"));
 	}
 	
@@ -39,7 +36,6 @@ public class LanguageTests extends BaseTests {
 	@Test
 	public void t4searchLanguageTest(){
 		LanguageAdminPage.search("GermanModify");
-		Driver.waitSeconds(1);
 		Assert.assertEquals(true,LanguageAdminPage.exists("GermanModify"));
 	}
 	/*

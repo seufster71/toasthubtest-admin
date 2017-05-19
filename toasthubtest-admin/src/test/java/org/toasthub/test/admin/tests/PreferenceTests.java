@@ -15,7 +15,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tAAloginTest(){
 		LoginPage.login();
-		Driver.waitMilli(500);
 		PreferenceAdminPage.gotoPage();
 	}
 
@@ -23,7 +22,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tABcreatePreferenceTest(){
 		PreferenceAdminPage.create("TEST_PAGE_NAME_TEST","PrefTest","PrefTest","Pref test spanish");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefTest"));
 	}
 	
@@ -31,7 +29,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tACmodifyPreferenceTest(){
 		PreferenceAdminPage.modify("PrefTest","PrefModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefModify"));
 	}
 	
@@ -39,7 +36,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tADsearchPreferenceTest(){
 		PreferenceAdminPage.search("PrefModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefModify"));
 	}
 	
@@ -47,14 +43,12 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tAEopenSubTest() {
 		PreferenceAdminPage.openSub("PrefModify");
-		Driver.waitMilli(500);
 	}
 	
 	// create formfield
 	@Test
 	public void tBAcreateFormField(){
 		PreferenceAdminPage.createFormfield("TEST_FORMFIELD_NAME_TEST","PrefForm","PrefForm","Pref form spanish","String","MAIN","labelen","labeles");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefForm"));
 	}
 	
@@ -62,7 +56,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tBBmodifyFormField(){
 		PreferenceAdminPage.modifyFormfield("PrefForm","PrefFormModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefFormModify"));
 	}
 	
@@ -75,9 +68,7 @@ public class PreferenceTests extends BaseTests {
 	// create label
 	@Test
 	public void tCAcreateLabel(){
-		Driver.waitMilli(500);
 		PreferenceAdminPage.createLabel("TEST_LABEL_NAME_TEST","PrefLabel","PrefLabel","Pref label spanish","","labelen","labeles");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefLabel"));
 	}
 	
@@ -85,7 +76,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tCBmodifyLabel(){
 		PreferenceAdminPage.modifyLabel("PrefLabel","PrefLabelModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefLabelModify"));
 	}
 	
@@ -98,9 +88,7 @@ public class PreferenceTests extends BaseTests {
 	// create text
 	@Test
 	public void tDAcreateText(){
-		Driver.waitMilli(500);
 		PreferenceAdminPage.createText("TEST_TEXT_NAME_TEST","PrefText","PrefText","Pref text spanish","","valueen","valuees");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefText"));
 	}
 	
@@ -108,7 +96,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tDBmodifyText(){
 		PreferenceAdminPage.modifyText("PrefText","PrefTextModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefTextModify"));
 	}
 	
@@ -121,10 +108,8 @@ public class PreferenceTests extends BaseTests {
 	// create option
 	@Test
 	public void tEAcreateOption(){
-		Driver.waitMilli(500);
 		PreferenceAdminPage.createOption("TEST_OPTION_NAME_TEST","PrefOption","PrefOption","Pref option spanish",
 				"Boolean","true","","valueen","","valuees","");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefOption"));
 	}
 	
@@ -132,7 +117,6 @@ public class PreferenceTests extends BaseTests {
 	@Test
 	public void tEBmodifyOption(){
 		PreferenceAdminPage.modifyOption("PrefOption","PrefOptionModify");
-		Driver.waitMilli(500);
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefOptionModify"));
 	}
 	
@@ -157,7 +141,6 @@ public class PreferenceTests extends BaseTests {
 	// delete the preference
 	@Test
 	public void tZAdeletePreferenceTest(){
-		Driver.waitMilli(500);
 		PreferenceAdminPage.delete("PrefModify");
 		Driver.waitMilli(500);
 		Assert.assertEquals(false,PreferenceAdminPage.exists("PrefModify"));

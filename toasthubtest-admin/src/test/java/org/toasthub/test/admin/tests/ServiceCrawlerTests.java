@@ -15,7 +15,6 @@ public class ServiceCrawlerTests extends BaseTests {
 	@Test
 	public void t1initTest(){
 		LoginPage.login();
-		Driver.waitSeconds(1);
 		ServiceCrawlerAdminPage.gotoPage();
 	}
 
@@ -23,19 +22,14 @@ public class ServiceCrawlerTests extends BaseTests {
 	@Test
 	public void t2createServiceTest(){
 		ServiceCrawlerAdminPage.create("TEST_SVC_AUTO_TEST","1.0","1.0","org.toasthub.org","MEMBER");
-		Driver.waitSeconds(2);
 		ServiceCrawlerAdminPage.search("TEST_SVC_AUTO_TEST");
-		Driver.waitSeconds(1);
 		Assert.assertEquals(true,ServiceCrawlerAdminPage.exists("TEST_SVC_AUTO_TEST"));
 	}
 	
 	// modify service
 	@Test
 	public void t3modifyServiceTest(){
-		//ServiceCrawlerAdminPage.search("TEST_SVC_AUTO_TEST");
-		//Driver.waitSeconds(1);
 		ServiceCrawlerAdminPage.modify("TEST_SVC_AUTO_TEST","org.toasthub.modify");
-		Driver.waitSeconds(1);
 		Assert.assertEquals(true,ServiceCrawlerAdminPage.exists("TEST_SVC_AUTO_TEST"));
 	}
 	
@@ -43,7 +37,6 @@ public class ServiceCrawlerTests extends BaseTests {
 	@Test
 	public void t4searchServiceTest(){
 		ServiceCrawlerAdminPage.search("TEST_SVC_AUTO_TEST");
-		Driver.waitSeconds(1);
 		Assert.assertEquals(true,ServiceCrawlerAdminPage.exists("TEST_SVC_AUTO_TEST"));
 	}
 	/*
@@ -51,8 +44,6 @@ public class ServiceCrawlerTests extends BaseTests {
 	@Test
 	public void createServiceTest(){
 		ServiceCrawlerAdminPage.create();
-		
-		
 	}
 	
 	*/
