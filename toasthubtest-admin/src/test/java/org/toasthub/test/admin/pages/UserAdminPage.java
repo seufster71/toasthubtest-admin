@@ -10,37 +10,51 @@ public class UserAdminPage {
 	
 	public static void gotoPage() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=user");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=users");
 	}
 	
-	public static void create(String titleDefault, String titleEN, String titleES, String code, String direction) {
+	public static void create(String firstName, String middleName, String lastName, String userName, String email, String zipCode, 
+			String language, String alternateEmail, String logLevel, Boolean status, Boolean forcePassReset) {
 		
 		// open create modal
-		Driver.findOrWaitById("user-menu").click();
-		Driver.findOrWaitById("user-add").click();
+		Driver.findOrWaitById("users-menu").click();
+		Driver.findOrWaitById("users-add").click();
 
 		// fill form
-		Driver.findOrWaitById("ADMIN_USER_FORM_TITLE_DEFAULT").sendKeys(titleDefault);
-		Driver.findOrWaitById("ADMIN_USER_FORM_TITLE_TEXT-en").sendKeys(titleEN);
-		Driver.findOrWaitById("ADMIN_USER_FORM_TITLE_TEXT-es").sendKeys(titleES);
-		Driver.findOrWaitById("ADMIN_USER_FORM_CODE").sendKeys(code);
+		Driver.findOrWaitById("ADMIN_USER_FORM_FIRSTNAME").sendKeys(firstName);
+		Driver.findOrWaitById("ADMIN_USER_FORM_MIDDLENAME").sendKeys(middleName);
+		Driver.findOrWaitById("ADMIN_USER_FORM_LASTNAME").sendKeys(lastName);
+		Driver.findOrWaitById("ADMIN_USER_FORM_USERNAME").sendKeys(userName);
+		Driver.findOrWaitById("ADMIN_USER_FORM_EMAIL").sendKeys(email);
+		Driver.findOrWaitById("ADMIN_USER_FORM_ZIPCODE").sendKeys(zipCode);
+		
+		// select language
+		Driver.findOrWaitById("ADMIN_USER_FORM_LANGUAGE-button").click();
+		Driver.waitMilli(500);
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+language+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		Driver.findOrWaitById("modalButtonAccept-languageWidgetModal").click();
+		Driver.waitMilli(500);
+				
+		Driver.findOrWaitById("ADMIN_USER_FORM_ALTERNATE_EMAIL").sendKeys(alternateEmail);
+		
+		Select level = new Select(Driver.findOrWaitById("ADMIN_USER_FORM_LOGLEVEL"));
+		level.selectByValue(logLevel);
+		
 		Driver.findOrWaitById("ADMIN_USER_FORM_ACTIVE-0").findElement(By.xpath("..")).click();
-		// not testing this yet
-		//Driver.getInstance().findElement(By.id("radio-ADMIN_USER_FORM_DEFAULT"));
-		Select dir = new Select(Driver.findOrWaitById("ADMIN_USER_FORM_DIRECTION"));
-		dir.selectByValue(direction);
+		Driver.findOrWaitById("ADMIN_USER_FORM_FORCERESET-0").findElement(By.xpath("..")).click();
+		
 		// save
-		Driver.findOrWaitById("modalButtonAccept-userModal").click();
+		Driver.findOrWaitById("modalButtonAccept-usersModal").click();
 		
 	}
 
-	public static void modify(String search, String titleEN) {
+	public static void modify(String search, String lastName) {
 		
 		// find test row ?
 		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'sb')]").click();
-		Driver.findOrWaitById("ADMIN_USER_FORM_TITLE_TEXT-en").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), titleEN);
+		Driver.findOrWaitById("ADMIN_USER_FORM_LASTNAME").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), lastName);
 		// save
-		Driver.findOrWaitById("modalButtonAccept-userModal").click();
+		Driver.findOrWaitById("modalButtonAccept-usersModal").click();
 		
 	}
 	

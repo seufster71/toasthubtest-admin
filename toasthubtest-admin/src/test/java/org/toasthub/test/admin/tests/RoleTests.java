@@ -21,7 +21,7 @@ public class RoleTests extends BaseTests {
 	// create language
 	@Test
 	public void t2createRoleTest(){
-		RoleAdminPage.create("TestRole", "TestRole", "El Test role", "ROL_TEST");
+		RoleAdminPage.create("TestRole", "TestRole", "El Test role", "ROL_TEST", "Bugdog");
 		Assert.assertEquals(true,RoleAdminPage.exists("TestRole"));
 	}
 	

@@ -9,14 +9,14 @@ public class RoleAdminPage {
 	
 	public static void gotoPage() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=role");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=roles");
 	}
 	
-	public static void create(String titleDefault, String titleEN, String titleES, String code) {
+	public static void create(String titleDefault, String titleEN, String titleES, String code, String application) {
 		
 		// open create modal
-		Driver.findOrWaitById("role-menu").click();
-		Driver.findOrWaitById("role-add").click();
+		Driver.findOrWaitById("roles-menu").click();
+		Driver.findOrWaitById("roles-add").click();
 		
 		// fill form
 		Driver.findOrWaitById("ADMIN_ROLE_FORM_TITLE_DEFAULT").sendKeys(titleDefault);
@@ -25,8 +25,14 @@ public class RoleAdminPage {
 		Driver.findOrWaitById("ADMIN_ROLE_FORM_CODE").sendKeys(code);
 		Driver.findOrWaitById("ADMIN_ROLE_FORM_ACTIVE-0").findElement(By.xpath("..")).click();
 		
+		// select application
+		Driver.findOrWaitById("ADMIN_ROLE_FORM_APPLICATION-button").click();
+		Driver.waitMilli(500);
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+application+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		Driver.findOrWaitById("modalButtonAccept-applicationWidgetModal").click();
+		Driver.waitMilli(500);
 		// save
-		Driver.findOrWaitById("modalButtonAccept-roleModal").click();
+		Driver.findOrWaitById("modalButtonAccept-rolesModal").click();
 		
 	}
 
@@ -36,7 +42,7 @@ public class RoleAdminPage {
 		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'sb')]").click();
 		Driver.findOrWaitById("ADMIN_ROLE_FORM_TITLE_TEXT-en").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), titleEN);
 		// save
-		Driver.findOrWaitById("modalButtonAccept-roleModal").click();
+		Driver.findOrWaitById("modalButtonAccept-rolesModal").click();
 		
 	}
 	
@@ -51,8 +57,8 @@ public class RoleAdminPage {
 	public static void search(String text) {
 		
 		// search
-		Driver.findOrWaitById("roleSearchField").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), text);
-		Driver.findOrWaitById("roleSearchField-button").click();
+		Driver.findOrWaitById("rolesSearchField").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), text);
+		Driver.findOrWaitById("rolesSearchField-button").click();
 	}
 	
 	public static Boolean exists(String text) {

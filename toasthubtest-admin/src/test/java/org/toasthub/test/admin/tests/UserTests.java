@@ -21,22 +21,22 @@ public class UserTests extends BaseTests {
 	// create language
 	@Test
 	public void t2createUserTest(){
-		UserAdminPage.create("German", "German", "Deutsche", "gr", "ltr");
-		Assert.assertEquals(true,UserAdminPage.exists("German"));
+		UserAdminPage.create("LeRoy", "Theman", "Jenkins", "l.jenkins", "l.jenkins@ggg.com", "33344", "Spanish", "ljenkins@yyy.com", "DEBUG", true, false);
+		Assert.assertEquals(true,UserAdminPage.exists("Jenkins"));
 	}
 	
 	// modify language
 	@Test
 	public void t3modifyUserTest(){
-		UserAdminPage.modify("German", "GermanModify");
-		Assert.assertEquals(true,UserAdminPage.exists("GermanModify"));
+		UserAdminPage.modify("Jenkins", "JenkinsModify");
+		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
 	
 	// search for the new language
 	@Test
 	public void t4searchUserTest(){
-		UserAdminPage.search("GermanModify");
-		Assert.assertEquals(true,UserAdminPage.exists("GermanModify"));
+		UserAdminPage.search("JenkinsModify");
+		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
 	/*
 	// create a duplicate language -- negative test
@@ -49,8 +49,8 @@ public class UserTests extends BaseTests {
 	// delete the language
 	@Test
 	public void t5deleteUserTest(){
-		UserAdminPage.delete("GermanModify");
+		UserAdminPage.delete("JenkinsModify");
 		Driver.waitSeconds(1);
-		Assert.assertEquals(false,UserAdminPage.exists("GermanModify"));
+		Assert.assertEquals(false,UserAdminPage.exists("JenkinsModify"));
 	}
 }
