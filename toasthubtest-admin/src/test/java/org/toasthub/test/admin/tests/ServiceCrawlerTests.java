@@ -22,6 +22,7 @@ public class ServiceCrawlerTests extends BaseTests {
 	@Test
 	public void t2createServiceTest(){
 		ServiceCrawlerAdminPage.create("TEST_SVC_AUTO_TEST","1.0","1.0","org.toasthub.org","MEMBER");
+		Driver.waitMilli(500);
 		ServiceCrawlerAdminPage.search("TEST_SVC_AUTO_TEST");
 		Assert.assertEquals(true,ServiceCrawlerAdminPage.exists("TEST_SVC_AUTO_TEST"));
 	}
@@ -36,6 +37,7 @@ public class ServiceCrawlerTests extends BaseTests {
 	// search for the new service
 	@Test
 	public void t4searchServiceTest(){
+		Driver.waitMilli(500);
 		ServiceCrawlerAdminPage.search("TEST_SVC_AUTO_TEST");
 		Assert.assertEquals(true,ServiceCrawlerAdminPage.exists("TEST_SVC_AUTO_TEST"));
 	}
@@ -50,8 +52,9 @@ public class ServiceCrawlerTests extends BaseTests {
 	// delete the service
 	@Test
 	public void t5deleteServiceTest(){
+		Driver.waitMilli(500);
 		ServiceCrawlerAdminPage.delete("TEST_SVC_AUTO_TEST");
-		Driver.waitSeconds(1);
+		Driver.waitMilli(500);
 		Assert.assertEquals(false,ServiceCrawlerAdminPage.exists("TEST_SVC_AUTO_TEST"));
 	}
 }

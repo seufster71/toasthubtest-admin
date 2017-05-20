@@ -21,7 +21,7 @@ public class ClientDomainTests extends BaseTests {
 	// create clientDomain
 	@Test
 	public void t2createClientDomainTest(){
-		ClientDomainAdminPage.create("Test System", "Test System", "Sistema de prueba", "cborghome.ddns.net", "toasthub1", "cborgcust", "cborgcust",
+		ClientDomainAdminPage.create("Test System", "Test System", "Sistema de prueba", "cborgtech.ddns.net", "toasthub1", "cborgcust", "cborgcust",
 				"publicLayout", "adminLayout", "memberLayout", "sysadminLayout");
 		Assert.assertEquals(true,ClientDomainAdminPage.exists("Test System"));
 	}
@@ -29,15 +29,16 @@ public class ClientDomainTests extends BaseTests {
 	// modify clientDomain
 	@Test
 	public void t3modifyClientDomainTest(){
-		ClientDomainAdminPage.modify("Test System", "Test System Modify");
-		Assert.assertEquals(true,ClientDomainAdminPage.exists("Test System Modify"));
+		ClientDomainAdminPage.modify("Test System", "TestSystemModify");
+		Assert.assertEquals(true,ClientDomainAdminPage.exists("TestSystemModify"));
 	}
 	
 	// search for the new clientDomain
 	@Test
 	public void t4searchClientDomainTest(){
-		ClientDomainAdminPage.search("Test System Modify");
-		Assert.assertEquals(true,ClientDomainAdminPage.exists("Test System Modify"));
+		Driver.waitMilli(500);
+		ClientDomainAdminPage.search("TestSystemModify");
+		Assert.assertEquals(true,ClientDomainAdminPage.exists("TestSystemModify"));
 	}
 	/*
 	// create a duplicate clientDomain -- negative test
@@ -52,8 +53,8 @@ public class ClientDomainTests extends BaseTests {
 	// delete the clientDomain
 	@Test
 	public void t5deleteClientDomainTest(){
-		ClientDomainAdminPage.delete("Test System Modify");
+		ClientDomainAdminPage.delete("TestSystemModify");
 		Driver.waitSeconds(1);
-		Assert.assertEquals(false,ClientDomainAdminPage.exists("Test System Modify"));
+		Assert.assertEquals(false,ClientDomainAdminPage.exists("TestSystemModify"));
 	}
 }

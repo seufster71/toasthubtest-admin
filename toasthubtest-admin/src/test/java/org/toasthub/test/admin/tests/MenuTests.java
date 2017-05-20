@@ -84,6 +84,7 @@ public class MenuTests extends BaseTests {
 	// delete the menu
 	@Test
 	public void tZAdeleteMenuTest(){
+		Driver.waitMilli(500);
 		MenuAdminPage.delete("MenuModify");
 		Driver.waitMilli(500);
 		Assert.assertEquals(false,MenuAdminPage.exists("MenuModify"));

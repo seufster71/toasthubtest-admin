@@ -2,7 +2,6 @@ package org.toasthub.test.admin.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.Select;
 import org.toasthub.test.core.general.GeneralSettings;
 import org.toasthub.test.core.selenium.Driver;
 
@@ -10,10 +9,10 @@ public class PermissionAdminPage {
 	
 	public static void gotoPage() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=permission");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=permissions");
 	}
 	
-	public static void create(String titleDefault, String titleEN, String titleES, String code, String direction) {
+	public static void create(String titleDefault, String titleEN, String titleES, String code, Boolean read, Boolean write, String application) {
 		
 		// open create modal
 		Driver.findOrWaitById("permission-menu").click();
@@ -25,16 +24,25 @@ public class PermissionAdminPage {
 		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_TITLE_TEXT-es").sendKeys(titleES);
 		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CODE").sendKeys(code);
 		
-		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CAN_READ-0").findElement(By.xpath("..")).click();
-		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CAN_WRITE-0").findElement(By.xpath("..")).click();
+		if (read){
+			Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CAN_READ-0").findElement(By.xpath("..")).click();
+		} else {
+			Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CAN_READ-1").findElement(By.xpath("..")).click();
+		}
+		if (write) {
+			Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CAN_WRITE-0").findElement(By.xpath("..")).click();
+		} else {
+			Driver.findOrWaitById("ADMIN_PERMISSION_FORM_CAN_WRITE-1").findElement(By.xpath("..")).click();
+		}
 		
 		// select application
 		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_APPLICATION-button").click();
-		
+		Driver.waitMilli(500);
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+application+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		Driver.findOrWaitById("modalButtonAccept-applicationWidgetModal").click();
+		Driver.waitMilli(500);
 		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_ACTIVE-0").findElement(By.xpath("..")).click();
 
-		Select dir = new Select(Driver.findOrWaitById("ADMIN_PERMISSION_FORM_DIRECTION"));
-		dir.selectByValue(direction);
 		// save
 		Driver.findOrWaitById("modalButtonAccept-permissionModal").click();
 		

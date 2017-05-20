@@ -35,6 +35,7 @@ public class PreferenceTests extends BaseTests {
 	// search for the new preference
 	@Test
 	public void tADsearchPreferenceTest(){
+		Driver.waitMilli(500);
 		PreferenceAdminPage.search("PrefModify");
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefModify"));
 	}
@@ -42,6 +43,7 @@ public class PreferenceTests extends BaseTests {
 	// open collapse
 	@Test
 	public void tAEopenSubTest() {
+		Driver.waitMilli(500);
 		PreferenceAdminPage.openSub("PrefModify");
 	}
 	
@@ -68,6 +70,7 @@ public class PreferenceTests extends BaseTests {
 	// create label
 	@Test
 	public void tCAcreateLabel(){
+		Driver.waitMilli(500);
 		PreferenceAdminPage.createLabel("TEST_LABEL_NAME_TEST","PrefLabel","PrefLabel","Pref label spanish","","labelen","labeles");
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefLabel"));
 	}
@@ -88,6 +91,7 @@ public class PreferenceTests extends BaseTests {
 	// create text
 	@Test
 	public void tDAcreateText(){
+		Driver.waitMilli(500);
 		PreferenceAdminPage.createText("TEST_TEXT_NAME_TEST","PrefText","PrefText","Pref text spanish","","valueen","valuees");
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefText"));
 	}
@@ -108,6 +112,7 @@ public class PreferenceTests extends BaseTests {
 	// create option
 	@Test
 	public void tEAcreateOption(){
+		Driver.waitMilli(500);
 		PreferenceAdminPage.createOption("TEST_OPTION_NAME_TEST","PrefOption","PrefOption","Pref option spanish",
 				"Boolean","true","","valueen","","valuees","");
 		Assert.assertEquals(true,PreferenceAdminPage.exists("PrefOption"));
@@ -141,6 +146,7 @@ public class PreferenceTests extends BaseTests {
 	// delete the preference
 	@Test
 	public void tZAdeletePreferenceTest(){
+		Driver.waitMilli(500);
 		PreferenceAdminPage.delete("PrefModify");
 		Driver.waitMilli(500);
 		Assert.assertEquals(false,PreferenceAdminPage.exists("PrefModify"));

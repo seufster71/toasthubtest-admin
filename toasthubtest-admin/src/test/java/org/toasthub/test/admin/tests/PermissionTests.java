@@ -21,22 +21,22 @@ public class PermissionTests extends BaseTests {
 	// create Permission
 	@Test
 	public void t2createPermissionTest(){
-		PermissionAdminPage.create("German", "German", "Deutsche", "gr", "ltr");
-		Assert.assertEquals(true,PermissionAdminPage.exists("German"));
+		PermissionAdminPage.create("TestPermission", "TestPermission", "ElTest", "PRM_TEST", true, true, "Bugdog");
+		Assert.assertEquals(true,PermissionAdminPage.exists("TestPermission"));
 	}
 	
 	// modify Permission
 	@Test
 	public void t3modifyPermissionTest(){
-		PermissionAdminPage.modify("German", "GermanModify");
-		Assert.assertEquals(true,PermissionAdminPage.exists("GermanModify"));
+		PermissionAdminPage.modify("TestPermission", "TestPermissionModify");
+		Assert.assertEquals(true,PermissionAdminPage.exists("TestPermissionModify"));
 	}
 	
 	// search for the new Permission
 	@Test
 	public void t4searchPermissionTest(){
-		PermissionAdminPage.search("GermanModify");
-		Assert.assertEquals(true,PermissionAdminPage.exists("GermanModify"));
+		PermissionAdminPage.search("TestPermissionModify");
+		Assert.assertEquals(true,PermissionAdminPage.exists("TestPermissionModify"));
 	}
 	/*
 	// create a duplicate Permission -- negative test
@@ -52,8 +52,9 @@ public class PermissionTests extends BaseTests {
 	// delete the Permission
 	@Test
 	public void t5deletePermissionTest(){
-		PermissionAdminPage.delete("GermanModify");
-		Driver.waitSeconds(1);
-		Assert.assertEquals(false,PermissionAdminPage.exists("GermanModify"));
+		
+		PermissionAdminPage.delete("TestPermissionModify");
+		Driver.waitMilli(500);
+		Assert.assertEquals(false,PermissionAdminPage.exists("TestPermissionModify"));
 	}
 }
