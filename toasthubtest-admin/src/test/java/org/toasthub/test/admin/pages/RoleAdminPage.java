@@ -28,7 +28,7 @@ public class RoleAdminPage {
 		// select application
 		Driver.findOrWaitById("ADMIN_ROLE_FORM_APPLICATION-button").click();
 		Driver.waitMilli(500);
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+application+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+application+"')]/preceding-sibling::td/div/input[contains(@id,'cboxapplication')]").click();
 		Driver.findOrWaitById("modalButtonAccept-applicationWidgetModal").click();
 		Driver.waitMilli(500);
 		// save

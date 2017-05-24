@@ -18,35 +18,35 @@ public class UserTests extends BaseTests {
 		UserAdminPage.gotoPage();
 	}
 
-	// create language
+	// create user
 	@Test
 	public void t2createUserTest(){
 		UserAdminPage.create("LeRoy", "Theman", "Jenkins", "l.jenkins", "l.jenkins@ggg.com", "33344", "Spanish", "ljenkins@yyy.com", "DEBUG", true, false);
 		Assert.assertEquals(true,UserAdminPage.exists("Jenkins"));
 	}
 	
-	// modify language
+	// modify user
 	@Test
 	public void t3modifyUserTest(){
 		UserAdminPage.modify("Jenkins", "JenkinsModify");
 		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
 	
-	// search for the new language
+	// search for the new user
 	@Test
 	public void t4searchUserTest(){
 		UserAdminPage.search("JenkinsModify");
 		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
-	/*
-	// create a duplicate language -- negative test
+
+	// create a duplicate user -- negative test
 	@Test
-	public void createUserTest(){
-		UserAdminPage.createUser();
+	public void t5addRoleTest(){
+		UserAdminPage.addRole("JenkinsModify","Member");
 	}
 	
-	*/
-	// delete the language
+	
+	// delete the user
 	@Test
 	public void t5deleteUserTest(){
 		UserAdminPage.delete("JenkinsModify");

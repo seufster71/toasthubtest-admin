@@ -58,6 +58,18 @@ public class UserAdminPage {
 		
 	}
 	
+	public static void addRole(String userName, String role) {
+		
+		// find test row ?
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+userName+"')]/following-sibling::td/span/a[contains(@id,'rls')]").click();
+		
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		
+		// save
+		Driver.findOrWaitById("modalButtonAccept-cancelModal").click();
+		
+	}
+	
 	public static void delete(String search) {
 		
 		// find test row ?
