@@ -31,7 +31,7 @@ public class UserAdminPage {
 		// select language
 		Driver.findOrWaitById("ADMIN_USER_FORM_LANGUAGE-button").click();
 		Driver.waitMilli(500);
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+language+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+language+"')]/preceding-sibling::td/div/input[contains(@id,'cboxlanguage')]").click();
 		Driver.findOrWaitById("modalButtonAccept-languageWidgetModal").click();
 		Driver.waitMilli(500);
 				
@@ -58,16 +58,33 @@ public class UserAdminPage {
 		
 	}
 	
-	public static void addRole(String userName, String role) {
-		
-		// find test row ?
+	public static void addRole(String userName, String titleDefault, String titleEN, String titleES, String code, String application) {
+
 		Driver.findOrWaitByXPath("//td[contains(text(),'"+userName+"')]/following-sibling::td/span/a[contains(@id,'rls')]").click();
+		RoleAdminPage.create(titleDefault, titleEN, titleES, code, application);
 		
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/preceding-sibling::td/div/input[contains(@id,'cbox')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+titleEN+"')]");
+		//Driver.findOrWaitById("modalButtonDecline-rolesWidgetModal").click();
+	}
+	
+	public static void selectRole(String role) {
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/preceding-sibling::td/div/input[contains(@id,'cboxrole')]").click();
+		Driver.findOrWaitByXPath("//div[@id='rolesMessageArea']/div[contains(text(),'Success')]");
+	}
+	
+	public static void addPermission(String role, String titleDefault, String titleEN, String titleES, String code, Boolean read, Boolean write, String application) {
+
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/following-sibling::td/span/a[contains(@id,'prm')]").click();
+		PermissionAdminPage.create(titleDefault, titleEN, titleES, code, read, write, application);
 		
-		// save
-		Driver.findOrWaitById("modalButtonAccept-cancelModal").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+titleEN+"')]");
 		
+		//Driver.findOrWaitById("modalButtonDecline-rolesWidgetModal").click();
+	}
+	
+	public static void selectPermission(String permission){
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+permission+"')]/preceding-sibling::td/div/input[contains(@id,'cboxrole')]").click();
+		Driver.findOrWaitByXPath("//div[@id='permissionsMessageArea']/div[contains(text(),'Success')]");
 	}
 	
 	public static void delete(String search) {

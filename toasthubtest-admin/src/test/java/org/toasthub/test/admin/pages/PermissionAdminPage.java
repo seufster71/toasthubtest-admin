@@ -1,6 +1,7 @@
 package org.toasthub.test.admin.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.toasthub.test.core.general.GeneralSettings;
 import org.toasthub.test.core.selenium.Driver;
@@ -41,6 +42,8 @@ public class PermissionAdminPage {
 		Driver.findOrWaitByXPath("//td[contains(text(),'"+application+"')]/preceding-sibling::td/div/input[contains(@id,'cboxapplication')]").click();
 		Driver.findOrWaitById("modalButtonAccept-applicationWidgetModal").click();
 		Driver.waitMilli(500);
+		JavascriptExecutor jsx = (JavascriptExecutor)Driver.getInstance();
+		jsx.executeScript("window.scrollBy(0,450)", "");
 		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_ACTIVE-0").findElement(By.xpath("..")).click();
 
 		// save

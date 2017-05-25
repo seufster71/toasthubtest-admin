@@ -42,12 +42,14 @@ public class MenuTests extends BaseTests {
 	// open collapse
 	@Test
 	public void tAEopenSubTest() {
+		Driver.waitMilli(500);
 		MenuAdminPage.openSub("MenuModify");
 	}
 	
 	// create submenu
 	@Test
 	public void tBAcreateSubMenu(){
+		Driver.waitMilli(500);
 		MenuAdminPage.createSubMenu("TEST_SUB_MENU_TEST","SubMenuEN","SubMenuHrefEN","SubMenuImageEN","SubMenuES","SubMenuHrefES","SubMenuImageES");
 		Assert.assertEquals(true,MenuAdminPage.exists("SubMenuEN"));
 	}

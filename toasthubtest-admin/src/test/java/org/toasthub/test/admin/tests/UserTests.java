@@ -13,44 +13,85 @@ import org.toasthub.test.core.selenium.Driver;
 public class UserTests extends BaseTests {
 
 	@Test
-	public void t1initTest(){
+	public void tAAinitTest(){
 		LoginPage.login();
 		UserAdminPage.gotoPage();
 	}
 
 	// create user
 	@Test
-	public void t2createUserTest(){
+	public void tABcreateUserTest(){
 		UserAdminPage.create("LeRoy", "Theman", "Jenkins", "l.jenkins", "l.jenkins@ggg.com", "33344", "Spanish", "ljenkins@yyy.com", "DEBUG", true, false);
 		Assert.assertEquals(true,UserAdminPage.exists("Jenkins"));
 	}
 	
 	// modify user
 	@Test
-	public void t3modifyUserTest(){
+	public void tACmodifyUserTest(){
 		UserAdminPage.modify("Jenkins", "JenkinsModify");
 		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
 	
 	// search for the new user
 	@Test
-	public void t4searchUserTest(){
+	public void tADsearchUserTest(){
 		UserAdminPage.search("JenkinsModify");
 		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
 
-	// create a duplicate user -- negative test
+	// create a role
 	@Test
-	public void t5addRoleTest(){
-		UserAdminPage.addRole("JenkinsModify","Member");
+	public void tAEaddRoleTest(){
+		UserAdminPage.addRole("JenkinsModify","TestWidgetRole", "TestWidgetRole", "El Test widget role", "ROL_WIDGET_TEST", "Bugdog");
 	}
 	
+	// select a role
+	@Test
+	public void tAFselectRoleTest(){
+		UserAdminPage.selectRole("TestWidgetRole");
+	}
+	
+	// create Permission
+	@Test
+	public void tAGaddPermissionTest(){
+		UserAdminPage.addPermission("TestWidgetRole", "TestWidgetPermission", "TestWidgetPermission", "ElTest widget permission", "PRM_WIDGET_TEST", true, true, "Bugdog");
+	}
+
+	// select a permission
+	@Test
+	public void tAHselectPermissionTest(){
+		UserAdminPage.selectPermission("TestWidgetPermission");
+	}
+	/*
+	// unselect a permission
+	@Test
+	public void tAIunselectPermissionTest(){
+		UserAdminPage.selectPermission("TestWidgetPermission");
+	}
+	
+	@Test
+	public void tAJdeletePermissionTest(){
+		UserAdminPage.deletePermission("TestWidgetPermission");
+	}
+	
+	// unselect a role
+	@Test
+	public void tAIunselectRoleTest(){
+		UserAdminPage.selectRole("TestWidgetRole");
+	}
+	
+	@Test
+	public void tAJdeleteRoleTest(){
+		UserAdminPage.deleteRole("TestWidgetRole");
+	}
 	
 	// delete the user
 	@Test
-	public void t5deleteUserTest(){
+	public void tAKdeleteUserTest(){
+		Driver.waitSeconds(1);
 		UserAdminPage.delete("JenkinsModify");
 		Driver.waitSeconds(1);
 		Assert.assertEquals(false,UserAdminPage.exists("JenkinsModify"));
 	}
+	*/
 }
