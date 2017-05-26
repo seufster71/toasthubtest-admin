@@ -72,19 +72,43 @@ public class UserAdminPage {
 		Driver.findOrWaitByXPath("//div[@id='rolesMessageArea']/div[contains(text(),'Success')]");
 	}
 	
+	public static void deleteRole(String role){
+		Driver.waitMilli(500);
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/following-sibling::td/span/a[contains(@id,'db')]").click();
+		// acknowledge
+		Driver.waitMilli(500);
+		Driver.findOrWaitById("modalButtonAccept-acknowledgeModal").click();
+		Driver.waitMilli(500);
+		
+		Driver.findOrWaitById("modalButtonDecline-rolesWidgetModal").click();
+	}
+	
 	public static void addPermission(String role, String titleDefault, String titleEN, String titleES, String code, Boolean read, Boolean write, String application) {
 
 		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/following-sibling::td/span/a[contains(@id,'prm')]").click();
 		PermissionAdminPage.create(titleDefault, titleEN, titleES, code, read, write, application);
 		
 		Driver.findOrWaitByXPath("//td[contains(text(),'"+titleEN+"')]");
-		
-		//Driver.findOrWaitById("modalButtonDecline-rolesWidgetModal").click();
 	}
 	
 	public static void selectPermission(String permission){
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+permission+"')]/preceding-sibling::td/div/input[contains(@id,'cboxrole')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+permission+"')]/preceding-sibling::td/div/input[contains(@id,'cboxpermission')]").click();
 		Driver.findOrWaitByXPath("//div[@id='permissionsMessageArea']/div[contains(text(),'Success')]");
+	}
+	
+	public static void deletePermission(String permission,String role){
+		Driver.findOrWaitById("modalButtonDecline-permissionsWidgetModal").click();
+		Driver.waitMilli(500);
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+role+"')]/following-sibling::td/span/a[contains(@id,'prm')]").click();
+		Driver.waitMilli(1000);
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+permission+"')]/following-sibling::td/span/a[contains(@id,'dbprm')]").click();
+		Driver.waitMilli(1000);
+		// acknowledge
+		Driver.findOrWaitById("modalButtonAccept-acknowledgeModal").click();
+		
+		Driver.waitMilli(500);
+		Driver.findOrWaitById("modalButtonDecline-permissionsWidgetModal").click();
+		
 	}
 	
 	public static void delete(String search) {

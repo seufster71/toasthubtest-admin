@@ -62,36 +62,39 @@ public class UserTests extends BaseTests {
 	public void tAHselectPermissionTest(){
 		UserAdminPage.selectPermission("TestWidgetPermission");
 	}
-	/*
+	
 	// unselect a permission
 	@Test
 	public void tAIunselectPermissionTest(){
+		Driver.waitMilli(500);
 		UserAdminPage.selectPermission("TestWidgetPermission");
 	}
 	
 	@Test
 	public void tAJdeletePermissionTest(){
-		UserAdminPage.deletePermission("TestWidgetPermission");
+		Driver.waitMilli(1000);
+		UserAdminPage.deletePermission("TestWidgetPermission","TestWidgetRole");
 	}
 	
 	// unselect a role
 	@Test
-	public void tAIunselectRoleTest(){
+	public void tAKunselectRoleTest(){
+		Driver.waitMilli(500);
 		UserAdminPage.selectRole("TestWidgetRole");
 	}
 	
 	@Test
-	public void tAJdeleteRoleTest(){
+	public void tALdeleteRoleTest(){
 		UserAdminPage.deleteRole("TestWidgetRole");
 	}
 	
 	// delete the user
 	@Test
-	public void tAKdeleteUserTest(){
+	public void tAMdeleteUserTest(){
 		Driver.waitSeconds(1);
 		UserAdminPage.delete("JenkinsModify");
 		Driver.waitSeconds(1);
 		Assert.assertEquals(false,UserAdminPage.exists("JenkinsModify"));
 	}
-	*/
+	
 }

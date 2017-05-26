@@ -54,7 +54,7 @@ public class PermissionAdminPage {
 	public static void modify(String search, String titleEN) {
 		
 		// find test row ?
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'sb')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'sbprm')]").click();
 		Driver.findOrWaitById("ADMIN_PERMISSION_FORM_TITLE_TEXT-en").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), titleEN);
 		// save
 		Driver.findOrWaitById("modalButtonAccept-permissionModal").click();
@@ -64,7 +64,7 @@ public class PermissionAdminPage {
 	public static void delete(String search) {
 		
 		// find test row ?
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'db')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'dbprm')]").click();
 		// acknowledge
 		Driver.findOrWaitById("modalButtonAccept-acknowledgeModal").click();
 	}
