@@ -9,6 +9,9 @@ import org.toasthub.test.core.general.BaseTests;
 import org.toasthub.test.core.pages.login.LoginPage;
 import org.toasthub.test.core.selenium.Driver;
 
+
+
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserTests extends BaseTests {
 
