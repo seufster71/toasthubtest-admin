@@ -9,7 +9,7 @@ public class ApplicationAdminPage {
 	
 	public static void gotoPage() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=application");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin");
 	}
 	
 	public static void create(String titleDefault, String titleEN, String titleES, String code) {

@@ -10,51 +10,66 @@ public class UserAdminPage {
 	
 	public static void gotoPage() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=users");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/users");
 	}
 	
 	public static void create(String firstName, String middleName, String lastName, String userName, String email, String zipCode, 
-			String language, String alternateEmail, String logLevel, Boolean status, Boolean forcePassReset) {
+			String language, String alternateEmail, String logLevel, String password, String verifyPassword, Boolean status, Boolean forcePassReset, Boolean save) {
 		
 		// open create modal
-		Driver.findOrWaitById("users-menu").click();
-		Driver.findOrWaitById("users-add").click();
+		Driver.findOrWaitById("ADMIN_USER-ADD").click();
 
-		// fill form
+		// set general info
 		Driver.findOrWaitById("ADMIN_USER_FORM_FIRSTNAME").sendKeys(firstName);
 		Driver.findOrWaitById("ADMIN_USER_FORM_MIDDLENAME").sendKeys(middleName);
 		Driver.findOrWaitById("ADMIN_USER_FORM_LASTNAME").sendKeys(lastName);
+		
 		Driver.findOrWaitById("ADMIN_USER_FORM_USERNAME").sendKeys(userName);
 		Driver.findOrWaitById("ADMIN_USER_FORM_EMAIL").sendKeys(email);
+		Driver.findOrWaitById("ADMIN_USER_FORM_ALTERNATE_EMAIL").sendKeys(alternateEmail);
 		Driver.findOrWaitById("ADMIN_USER_FORM_ZIPCODE").sendKeys(zipCode);
 		
+		// set password
+		Driver.findOrWaitById("ADMIN_USER_FORM_PASSWORD").sendKeys(password);
+		Driver.findOrWaitById("ADMIN_USER_FORM_VERIFY_PASSWORD").sendKeys(verifyPassword);
+		
 		// select language
-		Driver.findOrWaitById("ADMIN_USER_FORM_LANGUAGE-button").click();
+		Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_LANGUAGE']//div[@class=' css-tlfecz-indicatorContainer']").click();
+		Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_LANGUAGE']//div[normalize-space(text())='"+language+"']").click();
+		
+		// select loglevel
+		Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_LOGLEVEL']//div[@class=' css-tlfecz-indicatorContainer']").click();
+		Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_LOGLEVEL']//div[normalize-space(text())='"+logLevel+"']").click();
 		Driver.waitMilli(500);
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+language+"')]/preceding-sibling::td/div/input[contains(@id,'cboxlanguage')]").click();
-		Driver.findOrWaitById("modalButtonAccept-languageWidgetModal").click();
-		Driver.waitMilli(500);
-				
-		Driver.findOrWaitById("ADMIN_USER_FORM_ALTERNATE_EMAIL").sendKeys(alternateEmail);
 		
-		Select level = new Select(Driver.findOrWaitById("ADMIN_USER_FORM_LOGLEVEL"));
-		level.selectByValue(logLevel);
+		if (forcePassReset) {
+			Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_FORCERESET-SWITCH']//a[normalize-space(text())='Yes']").click();
+		} else {
+			Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_FORCERESET-SWITCH']//a[normalize-space(text())='No']").click();
+		}
 		
-		Driver.findOrWaitById("ADMIN_USER_FORM_ACTIVE-0").findElement(By.xpath("..")).click();
-		Driver.findOrWaitById("ADMIN_USER_FORM_FORCERESET-0").findElement(By.xpath("..")).click();
+		if (status) {
+			Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_ACTIVE-SWITCH']//a[normalize-space(text())='Active']").click();
+		} else {
+			Driver.findOrWaitByXPath("//div[@id='ADMIN_USER_FORM_ACTIVE-SWITCH']//a[normalize-space(text())='Disable']").click();
+		}
 		
-		// save
-		Driver.findOrWaitById("modalButtonAccept-usersModal").click();
+		if (save) {
+			Driver.findOrWaitByXPath("//button[@id='ADMIN_USER-BUTTON-SAVE']").click();
+		} else {
+			Driver.findOrWaitByXPath("//button[@id='ADMIN_USER_BUTTON-CANCEL']").click();
+		}
 		
 	}
 
 	public static void modify(String search, String lastName) {
 		
 		// find test row ?
-		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/span/a[contains(@id,'sb')]").click();
+		Driver.findOrWaitByXPath("//td[contains(text(),'"+search+"')]/following-sibling::td/i[contains(@id,'MODIFY')]").click();
 		Driver.findOrWaitById("ADMIN_USER_FORM_LASTNAME").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), lastName);
+		Driver.waitMilli(500);
 		// save
-		Driver.findOrWaitById("modalButtonAccept-usersModal").click();
+		Driver.findOrWaitByXPath("//button[@id='ADMIN_USER-BUTTON-SAVE']").click();
 		
 	}
 	
@@ -122,8 +137,8 @@ public class UserAdminPage {
 	public static void search(String text) {
 		
 		// search
-		Driver.findOrWaitById("userSearchField").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), text);
-		Driver.findOrWaitById("userSearchField-button").click();
+		Driver.findOrWaitById("ADMIN_USER-SEARCH").sendKeys(Keys.HOME,Keys.chord(Keys.SHIFT,Keys.END), text);
+		Driver.findOrWaitById("ADMIN_USER-SEARCH-button").click();
 	}
 	
 	public static Boolean exists(String text) {

@@ -10,21 +10,20 @@ public class LanguageAdminPage {
 	
 	public static void gotoPage() {
 		// got to page
-		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/index.html?page=language");
+		Driver.getInstance().get(GeneralSettings.hostWebContext+"/admin/language");
 	}
 	
 	public static void create(String titleDefault, String titleEN, String titleES, String code, String direction) {
 		
 		// open create modal
-		Driver.findOrWaitById("language-menu").click();
-		Driver.findOrWaitById("language-add").click();
+		Driver.findOrWaitById("ADMIN_LANGUAGE-ADD").click();
 		
 		// fill form
-		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_TITLE_DEFAULT").sendKeys(titleDefault);
-		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_TITLE_TEXT-en").sendKeys(titleEN);
-		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_TITLE_TEXT-es").sendKeys(titleES);
+		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_TITLE-DEFAULT").sendKeys(titleDefault);
+		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_TITLE-TEXT-en").sendKeys(titleEN);
+		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_TITLE-TEXT-es").sendKeys(titleES);
 		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_CODE").sendKeys(code);
-		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_ACTIVE-0").findElement(By.xpath("..")).click();
+		Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_ACTIVE-SWITCH").findElement(By.className("active")).click();
 		// not testing this yet
 		//Driver.getInstance().findElement(By.id("radio-ADMIN_LANGUAGE_FORM_DEFAULT"));
 		Select dir = new Select(Driver.findOrWaitById("ADMIN_LANGUAGE_FORM_DIRECTION"));

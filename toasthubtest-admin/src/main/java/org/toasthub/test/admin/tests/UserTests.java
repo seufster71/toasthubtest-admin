@@ -24,14 +24,14 @@ public class UserTests extends BaseTests {
 	// create user
 	@Test
 	public void tABcreateUserTest(){
-		UserAdminPage.create("LeRoy", "Theman", "Jenkins", "l.jenkins", "l.jenkins@ggg.com", "33344", "Spanish", "ljenkins@yyy.com", "DEBUG", true, false);
+		UserAdminPage.create("LeRoy", "Theman", "Jenkins", "l.jenkins", "l.jenkins@ggg.com", "33344", "Spanish", "ljenkins@yyy.com", "Debug", "Run88Fast#", "Run88Fast#", true, false, true);
 		Assert.assertEquals(true,UserAdminPage.exists("Jenkins"));
 	}
-	
+
 	// modify user
 	@Test
 	public void tACmodifyUserTest(){
-		UserAdminPage.modify("Jenkins", "JenkinsModify");
+		UserAdminPage.modify("l.jenkins", "JenkinsModify");
 		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
 	
@@ -41,7 +41,7 @@ public class UserTests extends BaseTests {
 		UserAdminPage.search("JenkinsModify");
 		Assert.assertEquals(true,UserAdminPage.exists("JenkinsModify"));
 	}
-
+/*
 	// create a role
 	@Test
 	public void tAEaddRoleTest(){
@@ -99,5 +99,5 @@ public class UserTests extends BaseTests {
 		Driver.waitSeconds(1);
 		Assert.assertEquals(false,UserAdminPage.exists("JenkinsModify"));
 	}
-	
+	*/
 }
